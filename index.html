@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Animations Showcase</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&family=Boldonse&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>LOADlib</h1>
+        <p>Awesome Free animations for your next project! <br> Click on the Animation to Copy the Code</p>
+        <button class="favorites-btn" id="favoritesBtn">Favorites</button>
+    </header>
+    
+    <main>
+        <section class="all-animations-section">
+            <h2>All Animations</h2>
+            <div class="animations-grid" id="animationsGrid"></div>
+        </section>
+    </main>
+    
+    <!-- Favorites Modal -->
+    <div class="modal" id="favoritesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Favorites</h2>
+                <span class="close" id="closeFavoritesModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="animations-grid" id="favoritesGrid"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="codeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Animation Code</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="code-tabs">
+                    <button class="tab-btn active" data-tab="html">HTML</button>
+                    <button class="tab-btn" data-tab="css">CSS</button>
+                    <button class="tab-btn" data-tab="js">JS</button>
+                </div>
+                <div class="code-content">
+                    <pre id="htmlCode"></pre>
+                    <pre id="cssCode"></pre>
+                    <pre id="jsCode"></pre>
+                </div>
+                <button class="copy-btn" id="copyBtn">Copy Code</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>LOADlib - Loading Animations Showcase</p>
+        <p>© 2026 All rights reserved</p>
+    </footer>
+    
+    <button id="scrollTopBtn" class="scroll-top-btn">↑</button>
+    
+    <script src="script.js"></script>
+</body>
+</html>

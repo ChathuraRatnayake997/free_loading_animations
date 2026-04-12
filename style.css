@@ -1,0 +1,402 @@
+/* --- DESIGN TOKENS --- */
+:root {
+    --bg: #f0f4f8;
+    --primary: #3b82f6;
+    --secondary: #10b981;
+    --accent: #f59e0b;
+    --text: #1f2937;
+    --white: #ffffff;
+    --border: #242d39;
+    --border-width: 3px;
+    --shadow-offset: 6px;
+    --radius: 0px; /* Square corners for a raw 2D look */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    background-image: radial-gradient(var(--border) 1px, transparent 0);
+    background-size: 25px 25px; /* Dotted 2D background */
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    line-height: 1.5;
+    padding: 2rem;
+}
+
+/* --- LAYOUT --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    background: var(--accent);
+    padding: 2rem;
+    border: var(--border-width) solid var(--border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border);
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.favorites-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--primary);
+    color: var(--text);
+    border: var(--border-width) solid var(--border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border);
+    padding: 0.5rem 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.favorites-btn:hover {
+    background: var(--secondary);
+}
+
+.favorites-btn:active {
+    transform: translate(var(--shadow-offset), var(--shadow-offset));
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+header h1 {
+    font-family: 'Boldonse', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.favorites-section {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background: var(--accent);
+    border: var(--border-width) solid var(--border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border);
+}
+
+.favorites-section h2, .all-animations-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.animations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+#favoritesModal .animations-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.animation-card {
+    position: relative;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--primary);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+.favorite-btn.favorited {
+    /* No background color change - only the heart symbol changes */
+}
+
+.animation-card {
+    background: var(--white);
+    border: var(--border-width) solid var(--border);
+    overflow: hidden;
+    transition: transform 0.1s;
+    cursor: pointer;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border);
+}
+
+.animation-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px var(--border);
+}
+
+.animation-preview {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background: var(--white);
+    margin: 5% auto;
+    padding: 0;
+    border: var(--border-width) solid var(--border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border);
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    background: var(--primary);
+    color: var(--text);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--border-width) solid var(--border);
+}
+
+.modal-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.close {
+    background: none;
+    border: var(--border-width) solid var(--border);
+    color: var(--text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    box-shadow: 4px 4px 0px var(--border);
+    transition: all 0.05s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+}
+
+.close:hover {
+    background: var(--secondary);
+}
+
+.close:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.code-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+    border-bottom: var(--border-width) solid var(--border);
+}
+
+.tab-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    background: none;
+    border: var(--border-width) solid var(--border);
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    box-shadow: 4px 4px 0px var(--border);
+    transition: all 0.05s;
+}
+
+.tab-btn:hover {
+    background: var(--secondary);
+}
+
+.tab-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+.tab-btn.active {
+    background: var(--accent);
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+.code-content {
+    position: relative;
+    background-color: var(--white);
+    border: var(--border-width) solid var(--border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+pre {
+    padding: 1.5rem;
+    margin: 0;
+    white-space: pre-wrap;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    display: none;
+}
+
+pre.active {
+    display: block;
+}
+
+.copy-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+    border: var(--border-width) solid var(--border);
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    color: var(--text);
+    background: var(--primary);
+    box-shadow: 4px 4px 0px var(--border);
+    transition: all 0.05s;
+    outline: none;
+}
+
+.copy-btn:hover {
+    background: var(--secondary);
+}
+
+.copy-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+.copy-btn.copied {
+    background: var(--secondary);
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+footer {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--accent);
+    border: var(--border-width) solid var(--border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border);
+    text-align: center;
+}
+
+footer p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.scroll-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--primary);
+    color: var(--text);
+    border: var(--border-width) solid var(--border);
+    box-shadow: 4px 4px 0px var(--border);
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top-btn:hover {
+    background: var(--secondary);
+}
+
+.scroll-top-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .animations-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+    
+
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .scroll-top-btn {
+        bottom: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
