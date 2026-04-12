@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Animation categories and their directories
     const animations = [
         { name: 'Angel', dir: 'Animations/1' }, 
-        //{ name: 'Anomaly', dir: 'Animations/2' },
+        { name: 'Anomaly', dir: 'Animations/2' },
         //{ name: 'Atom', dir: 'Animations/3' },
         //{ name: 'Bars', dir: 'Animations/4' },
         //{ name: 'Binary Stream', dir: 'Animations/5' },
